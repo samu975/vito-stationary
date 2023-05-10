@@ -32,3 +32,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Vito Stationary Shop
+
+Vito Stationary es un e-commerce de una papeleria en linea. tiene un buscador donde se puede encontrar los productor por su nombre. Tambien tiene un filtro donde se puede ordenar por precio y categoria. Hay un visualizador de como es el producto y un carrito de compras para añadirlo y pagar el producto, se podria hacer el pago por alguna api de pago como payU o mercadopago.
