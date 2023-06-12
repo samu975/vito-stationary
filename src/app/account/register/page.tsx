@@ -13,15 +13,15 @@ export default function register(){
           <h2>Registrarse</h2>
           <form action="" method="post">
             <label htmlFor="">Nombre:</label>
-            <input type="text" name='nombre' id=''/>
+            <input placeholder='Nombre' type="text" name='nombre' id=''/>
             <label htmlFor="">Apellido:</label>
-            <input type="text" name='apellido' id=''/>
+            <input placeholder='Apellido' type="text" name='apellido' id=''/>
             <label htmlFor="">Correo:</label>
-            <input type="text" name='correo' id=''/>
+            <input placeholder='email' type="text" name='correo' id=''/>
             <label htmlFor="">Contraseña:</label>
-            <input type="text" name='constraseña' id=''/>
-            <label htmlFor="">Telefono:</label>
-            <input type="text" name="telefono" id="" />
+            <input placeholder='Contraseña' type="password" name='constraseña' id=''/>
+            <label htmlFor="">Teléfono:</label>
+            <input placeholder='Teléfono' type="text" name="telefono" id="" />
           </form>
           <div className={styles.buttonContainer}>
             <button>Registrarse</button>

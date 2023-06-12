@@ -13,7 +13,7 @@ export default function login(){
           <h2>Recuperar Contraseña</h2>
           <form action="" method="get">
             <label htmlFor="">Correo Electronico:</label>
-            <input type="text" name='' id=''/>
+            <input placeholder='Correo' type="text" name='' id=''/>
           </form>
           <div className={styles.buttonContainer}>
             <button>Enviar</button>

@@ -1,7 +1,8 @@
 .loginContainer {
+  height: 100%;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  height: 80vh;
 }
 .logoContainer {
   justify-self: center;
@@ -12,7 +13,7 @@
   flex-direction: column;
   grid-template-rows: 50px 450px 100px;
   width: 358px;
-  height: 600px;
+  height: 640px;
   justify-self: center;
   align-self: center;
   padding: 30px 15px;
@@ -21,10 +22,9 @@
 }
 .inputsContainer h2 {
   align-self: center;
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 60px;
 }
 .inputsContainer form {
   display: grid;
@@ -33,12 +33,12 @@
 }
 
 .inputsContainer label {
-  font-size: 20px;
+  font-size: 1.2rem;
   width: 100%;
 }
 
 .inputsContainer input {
-  height: 4vh;
+  height: 2rem;
   background-color: #faf0d7;
   border: none;
   border-radius: 10px;
@@ -67,4 +67,22 @@
   color: #000000;
   text-decoration: underline;
   text-align: center;
+}
+@media only screen and (max-width: 768px) {
+  .inputsContainer h2 {
+    font-size: 1.3rem;
+  }
+  .loginContainer {
+    grid-template-columns: 1fr;
+  }
+  .logoContainer img {
+    width: 200px;
+    height: 200px;
+  }
+  .inputsContainer label {
+    font-size: 1rem;
+  }
+  .inputsContainer input::placeholder {
+    font-size: 1rem;
+  }
 }

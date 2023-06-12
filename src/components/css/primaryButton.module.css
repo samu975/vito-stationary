@@ -1,0 +1,5 @@
+.btn-primary {
+  @apply text-black px-4 rounded-lg py-2;
+  background-color: #ffd9c0;
+  margin: 0 0 0 2rem;
+}

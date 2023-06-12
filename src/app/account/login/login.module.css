@@ -41,7 +41,7 @@
 }
 
 .inputsContainer input {
-  height: 4vh;
+  height: 2rem;
   background-color: #faf0d7;
   border: none;
   border-radius: 10px;
@@ -70,4 +70,27 @@
   color: #000000;
   text-decoration: underline;
   text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .inputsContainer h2 {
+    font-size: 1.3rem;
+  }
+  .loginContainer {
+    grid-template-columns: 1fr;
+  }
+  .logoContainer img {
+    width: 200px;
+    height: 200px;
+  }
+  .inputsContainer label {
+    font-size: 1rem;
+  }
+  .inputsContainer input::placeholder {
+    font-size: 1rem;
+  }
+
+  .loginContainer {
+    grid-template-columns: 1fr;
+  }
 }

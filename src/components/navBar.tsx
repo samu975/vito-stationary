@@ -1,35 +1,36 @@
+"use client";
 import Link from "next/link";
-import styles from "./navigation.module.css";
-
-const links = [
-  {
-    label: "Inicio",
-    route: "/",
-  },
-  {
-    label: "Contactanos",
-    route: "/contact",
-  },
-  {
-    label: "Iniciar sesión",
-    route: "/account/login",
-  },
-  {
-    label: "Registrarse",
-    route: "/account/register"
-  }
-];
+import styles from "./css/navigation.module.css";
+import { usePathname } from "next/navigation";
 
 export function Navigation() {
+  const pathname = usePathname();
+  const menu = (
+    <>
+      <li>
+        <Link href="/">Inicio</Link>
+      </li>
+      <li>
+        <Link href="/contact">Contactanos</Link>
+      </li>
+      <li>
+        {pathname.startsWith("/account/login") ? (
+          <Link href="/account/register">Registrarse</Link>
+        ) : (
+          <Link href="/account/login">Iniciar sesión</Link>
+        )}
+      </li>
+    </>
+  );
   return (
     <header className={styles.header}>
-      <ul className={styles.navigation}>
-        {links.map(({ label, route }) => (
-          <li key={route}>
-            <Link href={route}>{label}</Link>
-          </li>
-        ))}
-      </ul>
+      {pathname.startsWith("/account") ? (
+        <ul className={styles.navigation}>{menu}</ul>
+      ) : (
+        <ul className={`${styles.navigation} ${styles.navigationCenter}`}>
+          {menu}
+        </ul>
+      )}
     </header>
   );
 }

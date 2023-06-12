@@ -1,0 +1,4 @@
+.button {
+  @apply text-sm text-center py-1 px-2 rounded-md inline-flex gap-1 mr-2;
+  background-color: #eea082;
+}
