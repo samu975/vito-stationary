@@ -11,8 +11,9 @@
   color: #eea082;
 }
 
-.navigation a:focus {
+.activeLink {
   text-decoration: underline;
+  color: #ffffff !important;
 }
 
 .navigation a:hover {

@@ -1,0 +1,8 @@
+.color {
+  background-color: #faf0d7;
+  border-color: #faf0d7;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
