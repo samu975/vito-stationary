@@ -5,6 +5,7 @@ interface Props {
   placeholder: string;
   onChange: (e: any) => void;
   width: string;
+  value?: string | number | readonly string[];
 }
 export const InputForm = (props: Props) => {
   return (
@@ -14,6 +15,7 @@ export const InputForm = (props: Props) => {
       </div>
       <div className="flex justify-left w-2/4 ">
         <input
+          value={props.value}
           type={props.type}
           placeholder={props.placeholder}
           onChange={props.onChange}

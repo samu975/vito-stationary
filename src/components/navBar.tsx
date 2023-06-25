@@ -3,10 +3,11 @@ import Link from "next/link";
 import styles from "./css/navigation.module.css";
 import { usePathname } from "next/navigation";
 import jwtDecode from "jwt-decode";
-import router from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export function Navigation() {
+  const router = useRouter();
   const [hydrated, setHydrated] = useState(false);
   const pathname = usePathname();
   const activeLink = pathname.startsWith("/account/perfil")
@@ -73,6 +74,7 @@ export function Navigation() {
 
   function cerrarSesion() {
     sessionStorage.clear();
+    router.push("/");
   }
 
   const menu = (

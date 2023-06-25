@@ -8,35 +8,38 @@ import styleTextArea from "./css/input.module.css";
 import { SecondaryButton } from "./secondaryButton";
 import FormButton from "./formButtons";
 import Link from "next/link";
+import Spinner from "./Spinner";
 
 interface ProductFormObj {
   _id?: string;
-  title?: string;
-  code?: number;
-  description?: string;
-  price?: number;
-  discount?: number;
+  nombre?: string;
+  codigo?: number;
+  descripcion?: string;
+  precio?: number;
+  descuento?: number;
   cantidad?: number;
-  images?: string;
+  imagen?: string;
 }
 
 const ProductForm = ({
   _id,
-  code: existingCode,
-  title: existingTitle,
-  description: existingDescription,
+  codigo: existingCodigo,
+  nombre: existingTitulo,
+  descripcion: existingDescription,
+  descuento: existingDiscount,
   cantidad: existingCantidad,
-  price: existingPrice,
-  images: existingImages,
+  precio: existingPrice,
+  imagen: existingImages,
 }: ProductFormObj) => {
-  const [code, setCode] = useState(existingCode || 0);
-  const [title, setTitle] = useState(existingTitle || "");
+  const [codigo, setcodigo] = useState(existingCodigo || 0);
+  const [titulo, setTitle] = useState(existingTitulo || "");
   const [price, setPrice] = useState(existingPrice || 0);
-  const [discount, setDiscount] = useState(0);
+  const [discount, setDiscount] = useState(existingDiscount || 0);
   const [images, setImages] = useState(existingImages || "");
   const [description, setDescription] = useState(existingDescription || "");
   const [cantidad, setCantidad] = useState(existingCantidad || 0);
   const [goProducts, setGoProducts] = useState(false);
+  const [isloading, setIsloading] = useState(false);
   const router = useRouter();
 
   function goBack() {
@@ -46,8 +49,8 @@ const ProductForm = ({
   async function saveProduct(e: any) {
     e.preventDefault();
     const data = {
-      codigo: code,
-      nombre: title,
+      codigo: codigo,
+      nombre: titulo,
       precio: price,
       descuento: discount,
       descripcion: description,
@@ -73,38 +76,57 @@ const ProductForm = ({
 
   async function uploadImages(e: any) {
     const files = e.target?.files;
+    setIsloading(true);
     if (files?.length > 0) {
       const data = new FormData();
       for (const file of files) {
         data.append("file", file);
       }
+      console.log(isloading);
       const response = await axios.post("/api/upload", data);
-      console.log(response.data);
+      setImages(response.data);
     }
+    setIsloading(false);
+    console.log(isloading);
   }
 
   return (
     <div className="grid grid-cols-4 mx-6 my-20 items-center">
       <div className="col-span-1 flex  flex-col">
-        <label
-          className={`h-60 w-60 flex flex-wrap justify-center self-center items-center text-center flex-col border-4 border-spacing-0 border-dashed cursor-pointer ${Style.bgColor} ${Style.borderColor}`}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className={`w-16 h-16 ${Style.borderColor}`}
+        {isloading && <Spinner />}
+        {images ? (
+          <>
+            <img src={images} />
+            <div>
+              <label>Remplazar imagen</label>
+              <input
+                type="file"
+                onChange={uploadImages}
+                title="reemplazar imagen"
+              />
+            </div>
+          </>
+        ) : (
+          <label
+            className={`h-60 w-60 flex flex-wrap justify-center self-center items-center text-center flex-col border-4 border-spacing-0 border-dashed cursor-pointer ${Style.bgColor} ${Style.borderColor}`}
           >
-            <path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-          </svg>
-          <h4
-            className={`text-base font-bold px-8 text-center ${Style.borderColor}`}
-          >
-            Elige imagenes para el producto
-          </h4>
-          <input type="file" onChange={uploadImages} className="hidden" />
-        </label>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className={`w-16 h-16 ${Style.borderColor}`}
+            >
+              <path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+            </svg>
+            <h4
+              className={`text-base font-bold px-8 text-center ${Style.borderColor}`}
+            >
+              Elige imagenes para el producto
+            </h4>
+            <input type="file" onChange={uploadImages} className="hidden" />
+          </label>
+        )}
         <div className="flex justify-start flex-wrap">
           <h3 className="font-semibold my-6 text-lg text-left ml-6">
             Subir imagenes:
@@ -125,8 +147,9 @@ const ProductForm = ({
           placeholder="Código"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             const value = parseInt(e.target.value);
-            setCode(value);
+            setcodigo(value);
           }}
+          value={codigo}
         />
         <InputForm
           text="Título del producto:"
@@ -136,6 +159,7 @@ const ProductForm = ({
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setTitle(e.target.value);
           }}
+          value={titulo}
         />
         <InputForm
           text="Precio del producto:"
@@ -146,6 +170,7 @@ const ProductForm = ({
             const value = parseInt(e.target.value);
             setPrice(value);
           }}
+          value={price}
         />
         <InputForm
           text="Descuento del producto (%):"
@@ -156,6 +181,7 @@ const ProductForm = ({
             const value = parseInt(e.target.value);
             setDiscount(value);
           }}
+          value={discount}
         />
         {/* <InputForm text="Categoría:" /> */}
         <InputForm
@@ -167,6 +193,7 @@ const ProductForm = ({
             const value = parseInt(e.target.value);
             setCantidad(value);
           }}
+          value={cantidad}
         />
         <div className="flex justify-around w-full mt-3 mb-5">
           <div className="flex justify-left w-1/3 ">

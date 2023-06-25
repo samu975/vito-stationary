@@ -5,8 +5,12 @@ import Link from "next/link";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
+import { withSwal } from "react-sweetalert2";
+import { useRouter } from "next/navigation";
 
-export default function login() {
+function Login({ swal }: { swal: any }) {
+  const router = useRouter();
+
   if (
     typeof window !== "undefined" &&
     sessionStorage.getItem("token") !== null
@@ -38,10 +42,26 @@ export default function login() {
         sessionDataStorage(response.data.access_token);
         setIsLoading(false);
         setdata(response.data);
+        swal
+          .fire({
+            title: "Bienvenido ",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+          })
+          .then(() => {
+            router.push("/");
+          });
       })
       .catch(function (error) {
-        console.error(error);
         setIsLoading(false);
+        setTimeout(() => {
+          swal.fire({
+            title: "Error",
+            text: "Usuario o contraseña incorrectos",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+          });
+        }, 1000);
         seterr(error);
       });
   };
@@ -60,8 +80,8 @@ export default function login() {
         <div className={styles.inputsContainer}>
           <h2>Iniciar sesión</h2>
           <form action="" method="get">
-            <label htmlFor="">Usuario:</label>
-            <input placeholder="Usuario" type="text" name="" id="email" />
+            <label htmlFor="">Email:</label>
+            <input placeholder="Email" type="text" name="" id="email" />
             <label htmlFor="">Contraseña:</label>
             <input
               placeholder="Contraseña"
@@ -80,3 +100,4 @@ export default function login() {
     </>
   );
 }
+export default withSwal(({ swal }: any) => <Login swal={swal} />);
