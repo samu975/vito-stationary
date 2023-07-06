@@ -30,6 +30,7 @@ function Register({ swal }: any) {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    validationData();
     e.preventDefault();
     switch (e.target.id) {
       case "name":
@@ -54,17 +55,19 @@ function Register({ swal }: any) {
   function validationData() {
     if (
       data.nombre === "" ||
+      password === "" ||
       data.apellido === "" ||
       data.email === "" ||
-      data.contrasena === "" ||
       data.telefono === ""
     ) {
       setError("Por favor llene todos los campos");
       return false;
-    } else if (!isEmailValid(data.email)) {
+    }
+    if (!isEmailValid(data.email)) {
       setError("Por favor ingrese un email valido");
       return false;
-    } else if (data.contrasena.length < 8) {
+    }
+    if (data.contrasena.length < 8) {
       setError("La contraseña debe tener al menos 8 caracteres");
       return false;
     } else {
@@ -72,13 +75,14 @@ function Register({ swal }: any) {
     }
   }
   function errorMessage(error: string) {
-    setTimeout(() => {
+    if (error !== "") {
       swal.fire({
         title: error,
         icon: "error",
         confirmButtonText: "Ok",
       });
-    }, 1000);
+      setError("");
+    }
   }
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -98,13 +102,6 @@ function Register({ swal }: any) {
         })
         .catch(function (error) {
           setError(error);
-          setTimeout(() => {
-            swal.fire({
-              title: error,
-              icon: "error",
-              confirmButtonText: "Ok",
-            });
-          }, 1000);
         });
     } else {
       errorMessage(error);
@@ -172,6 +169,7 @@ function Register({ swal }: any) {
           </div>
         </div>
       </div>
+      {/* {validationData()} */}
     </>
   );
 }

@@ -2,7 +2,6 @@
 import Link from "next/link";
 import styles from "./css/navigation.module.css";
 import { usePathname } from "next/navigation";
-import jwtDecode from "jwt-decode";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -10,9 +9,7 @@ export function Navigation() {
   const router = useRouter();
   const [hydrated, setHydrated] = useState(false);
   const pathname = usePathname();
-  const activeLink = pathname.startsWith("/account/perfil")
-    ? styles.activeLink
-    : "";
+
   useEffect(() => {
     setHydrated(true);
   });

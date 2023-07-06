@@ -1,5 +1,8 @@
+"use client";
 import { Navigation } from "@/components/navBar";
 import "./globals.css";
+import Header from "@/components/header";
+import { DrawerProvider } from "@/components/drawer";
 
 export const metadata = {
   title: "Vito stationary shop",
@@ -18,7 +21,10 @@ export default function RootLayout({
         <title>Vito Stationary Shop</title>
       </head>
       <body className="scrollbar-thumb-red-600">
-        <Navigation />
+        <DrawerProvider>
+          <Navigation />
+          <Header />
+        </DrawerProvider>
         {children}
       </body>
     </html>

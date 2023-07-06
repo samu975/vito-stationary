@@ -31,28 +31,24 @@ const ProductForm = ({
   precio: existingPrice,
   imagen: existingImages,
 }: ProductFormObj) => {
-  const [codigo, setcodigo] = useState(existingCodigo || 0);
+  const [codigo, setcodigo] = useState(existingCodigo || "");
   const [titulo, setTitle] = useState(existingTitulo || "");
-  const [price, setPrice] = useState(existingPrice || 0);
-  const [discount, setDiscount] = useState(existingDiscount || 0);
+  const [price, setPrice] = useState(existingPrice || "");
+  const [discount, setDiscount] = useState(existingDiscount || "");
   const [images, setImages] = useState(existingImages || "");
   const [description, setDescription] = useState(existingDescription || "");
-  const [cantidad, setCantidad] = useState(existingCantidad || 0);
+  const [cantidad, setCantidad] = useState(existingCantidad || "");
   const [goProducts, setGoProducts] = useState(false);
   const [isloading, setIsloading] = useState(false);
   const router = useRouter();
 
-  function goBack() {
-    setGoProducts(true);
-  }
-
   async function saveProduct(e: any) {
     e.preventDefault();
     const data = {
-      codigo: codigo,
+      codigo: codigo.toString(),
       nombre: titulo,
-      precio: price,
-      descuento: discount,
+      precio: price.toString(),
+      descuento: discount.toString(),
       descripcion: description,
       imagen: images,
       cantidad,
@@ -70,6 +66,10 @@ const ProductForm = ({
     setGoProducts(true);
   }
 
+  function goBack() {
+    setGoProducts(true);
+  }
+
   if (goProducts) {
     router.push("/admin/products");
   }
@@ -82,12 +82,10 @@ const ProductForm = ({
       for (const file of files) {
         data.append("file", file);
       }
-      console.log(isloading);
       const response = await axios.post("/api/upload", data);
       setImages(response.data);
     }
     setIsloading(false);
-    console.log(isloading);
   }
 
   return (
@@ -146,7 +144,7 @@ const ProductForm = ({
           type="text"
           placeholder="Código"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const value = parseInt(e.target.value);
+            const value = e.target.value;
             setcodigo(value);
           }}
           value={codigo}
@@ -167,8 +165,7 @@ const ProductForm = ({
           type="text"
           placeholder="Precio"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const value = parseInt(e.target.value);
-            setPrice(value);
+            setPrice(e.target.value);
           }}
           value={price}
         />
@@ -178,8 +175,7 @@ const ProductForm = ({
           type="text"
           placeholder="Descuento"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const value = parseInt(e.target.value);
-            setDiscount(value);
+            setDiscount(e.target.value);
           }}
           value={discount}
         />
@@ -190,8 +186,7 @@ const ProductForm = ({
           type="text"
           placeholder="Cantidad"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const value = parseInt(e.target.value);
-            setCantidad(value);
+            setCantidad(e.target.value);
           }}
           value={cantidad}
         />

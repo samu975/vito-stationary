@@ -28,3 +28,15 @@ input[type="password"]:focus {
   outline: none;
   border: 1px solid #333;
 }
+
+/* Estilo para el input de tipo número */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  background-color: red;
+  opacity: 1;
+}
+
+/* Estilo adicional para el input de tipo número en Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
