@@ -12,6 +12,7 @@ export default function users() {
       <AdminTable
         class={["px-1 w-16", "px-2 w-40", "px-1 w-16"]}
         variable="usuarios"
+        href="users"
       />
     </>
   );

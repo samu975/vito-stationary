@@ -1,17 +1,16 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { ReactElement, useState } from "react";
+import { useState } from "react";
 import Style from "./css/productForm.module.css";
 import { InputForm } from "./inputForm";
 import styleTextArea from "./css/input.module.css";
-import { SecondaryButton } from "./secondaryButton";
 import FormButton from "./formButtons";
 import Link from "next/link";
 import Spinner from "./Spinner";
 
 interface ProductFormObj {
-  _id?: string;
+  id?: string;
   nombre?: string;
   codigo?: number;
   descripcion?: string;
@@ -22,7 +21,7 @@ interface ProductFormObj {
 }
 
 const ProductForm = ({
-  _id,
+  id,
   codigo: existingCodigo,
   nombre: existingTitulo,
   descripcion: existingDescription,
@@ -45,6 +44,7 @@ const ProductForm = ({
   async function saveProduct(e: any) {
     e.preventDefault();
     const data = {
+      id,
       codigo: codigo.toString(),
       nombre: titulo,
       precio: price.toString(),
@@ -53,11 +53,10 @@ const ProductForm = ({
       imagen: images,
       cantidad,
     };
-    if (_id) {
+    if (id) {
       //update
-      await axios.put(`${process.env.BACKEND_URL}/api/producto`, {
+      await axios.put(`${process.env.BACKEND_URL}/api/producto/${id}`, {
         ...data,
-        _id,
       });
     } else {
       //create
@@ -88,6 +87,7 @@ const ProductForm = ({
     setIsloading(false);
   }
 
+  console.log(id);
   return (
     <div className="grid grid-cols-4 mx-6 my-20 items-center">
       <div className="col-span-1 flex  flex-col">

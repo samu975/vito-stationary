@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
 import SweetAlert2 from "react-sweetalert2";
-import {} from "next/navigation";
 
 export default function DeleteButton({
   argument,

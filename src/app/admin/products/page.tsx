@@ -26,6 +26,7 @@ export default function products() {
           "px-1 w-16",
         ]}
         variable="producto"
+        href="products"
       />
     </>
   );

@@ -1,3 +1,11 @@
+import { AdminLinkTitle } from "@/components/adminLinkTitle";
+import UserForm from "@/components/userForm";
+
 export default function NewUser() {
-  return <h1>Hola mundo desde New User</h1>;
+  return (
+    <>
+      <AdminLinkTitle text={"Agregar Usuario"} />
+      <UserForm />
+    </>
+  );
 }

@@ -3,6 +3,7 @@ import { Navigation } from "@/components/navBar";
 import "./globals.css";
 import Header from "@/components/header";
 import { DrawerProvider } from "@/components/drawer";
+import { usePathname } from "next/navigation";
 
 export const metadata = {
   title: "Vito stationary shop",
@@ -15,6 +16,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathName = usePathname();
+  const excludedPaths = [
+    "/account",
+    "/contact",
+    "/admin",
+    "/checkout",
+    "/order",
+  ];
+  const showHeader = !excludedPaths.some((path) => pathName.includes(path));
   return (
     <html lang="es">
       <head>
@@ -23,7 +33,7 @@ export default function RootLayout({
       <body className="scrollbar-thumb-red-600">
         <DrawerProvider>
           <Navigation />
-          <Header />
+          {showHeader && <Header />}
         </DrawerProvider>
         {children}
       </body>

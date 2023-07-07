@@ -8,6 +8,7 @@ import DeleteButton from "./deleteButton";
 interface AdminTableProps {
   class: string[];
   variable: string;
+  href?: string;
 }
 
 export const AdminTable = (props: AdminTableProps) => {
@@ -77,7 +78,6 @@ export const AdminTable = (props: AdminTableProps) => {
                 {keys.map((key) => {
                   return (
                     <td
-                      id={(item as any).id + (item as any).title}
                       key={`${Date.now}${(item as any).id}${
                         (item as any).title
                       }${Math.random() * 10}`}
@@ -93,7 +93,7 @@ export const AdminTable = (props: AdminTableProps) => {
                   <SecondaryButton
                     style={"p-1 px-4 my-2 bg-primary flex rounded-md"}
                     text="Editar"
-                    href={`/admin/products/edit/${(item as any).id}`}
+                    href={`/admin/${props.href}/edit/${(item as any).id}`}
                     reactElemet={
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
