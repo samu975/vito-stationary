@@ -144,7 +144,12 @@ export const NavAdmin = () => {
 
             <span>Usuarios</span>
           </Link>
-          <Link href={"/admin/settings"} className={inactiveLink}>
+          <Link
+            href={"/admin/settings"}
+            className={
+              pathname.includes("/admin/settings") ? activeLink : inactiveLink
+            }
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

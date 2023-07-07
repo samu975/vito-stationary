@@ -13,6 +13,7 @@ export default function FormButton(props: Props) {
   return (
     <>
       <button
+        onClick={props.onClick}
         className={`mt-5 ${
           !props.styles ? "w-64 h-14" : props.styles
         } rounded-xl ${props.color === "claro" ? style.claro : style.oscuro} `}

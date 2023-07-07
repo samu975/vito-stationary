@@ -26,9 +26,11 @@ export function Navigation() {
       <>
         <li>
           <Link
-            href="/account/perfil"
+            href="/account/perfil/settings"
             className={
-              pathname.startsWith("/account/perfil") ? styles.activeLink : ""
+              pathname.startsWith("/account/perfil/settings")
+                ? styles.activeLink
+                : ""
             }
           >
             Perfil

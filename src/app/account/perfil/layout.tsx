@@ -4,7 +4,7 @@ import jwtDecode from "jwt-decode";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Perfil() {
+export default function Perfil({ children }: { children: React.ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
   const router = useRouter();
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function Perfil() {
   return (
     <div className="min-h-screen flex">
       <NavUser />
-      <div className="bg-white flex-grow mt-2 mr-2 rounded-lg"></div>
+      <div className="bg-white flex-grow mt-2 mr-2 rounded-lg">{children}</div>
     </div>
   );
 }
